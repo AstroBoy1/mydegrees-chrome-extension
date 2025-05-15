@@ -1,43 +1,27 @@
-const express = require('express');
+// app.js
+import dotenv from 'dotenv';
+dotenv.config();
 
-const app     = express();
+import express from 'express';
 
-// (1) Built-in middleware for parsing JSON bodies
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.URL,
+  process.env.KEY
+);
+
+const app = express();
 app.use(express.json());
 
-const courseCosts = {
-    MATH101: { saving: 1000 },
-    ENG201:  { saving:  600 },
-  };
-
-app.get('/', (req, res) => {
-  res.send('Hello, Express!');
-});
-
-// GET /api/cost-saving?course=<courseId>
 // http://localhost:3000/api/cost-saving?course=ENG201
-app.get('/api/cost-saving', (req, res) => {
-    const courseId = req.query.course;
-    if (!courseId) {
-      return res
-        .status(400)
-        .json({ error: 'Missing required query parameter: course' });
-    }
-  
-    const record = courseCosts[courseId.toUpperCase()];
-    if (!record) {
-      return res
-        .status(404)
-        .json({ error: `No cost data found for course ${courseId}` });
-    }
-  
-    const savings = record.saving;
-    return res.json({
-      course:   courseId.toUpperCase(),
-      saving:   savings,
-      details:  record
-    });
-  });
+app.get('/api/cost-saving', async (req, res) => {
+    const fullResp = await supabase
+    .from('testing')
+    .select();
+  console.log('Supabase response:', JSON.stringify(fullResp, null, 2));
+  return res.status(200).json(fullResp.data);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

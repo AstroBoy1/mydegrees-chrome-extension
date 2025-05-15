@@ -2,3 +2,6 @@ npm init -y
 npm install express
 npm install --save-dev nodemon
 npm run dev
+npm install pg
+npm install postgres
+npm install @supabase/supabase-js
