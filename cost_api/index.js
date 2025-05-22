@@ -14,11 +14,14 @@ const supabase = createClient(
 const app = express();
 app.use(express.json());
 
-// http://localhost:3000/api/cost-saving?course=ENG201
+// e.g., GET http://localhost:3000/api/cost-saving?department=cs
 app.get('/api/cost-saving', async (req, res) => {
+    const department = req.query.department;
+
     const fullResp = await supabase
     .from('testing')
-    .select();
+    .select()
+    .eq('department', department);
   console.log('Supabase response:', JSON.stringify(fullResp, null, 2));
   return res.status(200).json(fullResp.data);
 });
