@@ -5,3 +5,4 @@ npm run dev
 npm install pg
 npm install postgres
 npm install @supabase/supabase-js
+npm install cors

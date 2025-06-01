@@ -1,5 +1,7 @@
 // app.js
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 dotenv.config();
 
 import express from 'express';
@@ -13,6 +15,7 @@ const supabase = createClient(
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // e.g., GET http://localhost:3000/api/cost-saving?department=cs
 app.get('/api/cost-saving', async (req, res) => {
