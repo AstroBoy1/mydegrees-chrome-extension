@@ -30,6 +30,7 @@ app.get('/api/cost-saving', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+const publicUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on ${publicUrl}`);
 });
