@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // e.g., GET http://localhost:3000/api/cost-saving?department=cs
+// https://mydegrees-chrome-extension.onrender.com/api/cost-saving?department=cs
 app.get('/api/cost-saving', async (req, res) => {
     const department = req.query.department;
 
@@ -32,5 +33,5 @@ app.get('/api/cost-saving', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 const publicUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on ${publicUrl}`);
+  console.log(`Server running on ${publicUrl}`);
 });
