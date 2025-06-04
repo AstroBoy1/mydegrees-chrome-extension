@@ -17,9 +17,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// e.g., GET http://localhost:3000/api/cost-saving?department=cs
-// https://mydegrees-chrome-extension.onrender.com/api/cost-saving?department=cs
+// e.g., GET http://localhost:3000/api/cost-saving?department=general
+// https://mydegrees-chrome-extension.onrender.com/api/cost-saving?department=general
 app.get('/api/cost-saving', async (req, res) => {
+  // Returns the cost-saving data for the specified department
     const department = req.query.department;
 
     const fullResp = await supabase
